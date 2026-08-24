@@ -1,24 +1,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CG Weekly Attendance Report</title>
+<title>CG Attendance</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CG Attendance">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#283368">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#12211A;
-    --ink-soft:#5A6A62;
-    --field:#E7EDE5;
+    --ink:#151A2B;
+    --ink-soft:#5C6480;
+    --field:#E9EBF2;
     --card:#FFFFFF;
-    --line:#D2DCCF;
-    --pine:#2E6B4F;
-    --pine-deep:#1E4B37;
-    --pine-soft:#E3EFE8;
-    --gold:#A8790E;
-    --gold-soft:#F6EEDA;
-    --slate:#7C8880;
+    --line:#D3D7E4;
+    --pine:#283368;
+    --pine-deep:#1B234C;
+    --pine-soft:#E4E7F4;
+    --gold:#8A6A12;
+    --gold-soft:#F5EFDC;
+    --slate:#7E849B;
     --radius:14px;
-    --shadow:0 1px 2px rgba(18,33,26,.06), 0 8px 24px rgba(18,33,26,.06);
+    --shadow:0 1px 2px rgba(21,26,43,.06), 0 8px 24px rgba(21,26,43,.06);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -53,7 +61,7 @@
   .card-head{
     display:flex;align-items:center;gap:10px;
     padding:14px 16px;border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg,#fff, #FAFCF9);
+    background:linear-gradient(180deg,#fff, #FAFBFE);
   }
   .card-head h2{
     font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;margin:0;flex:1;
@@ -84,7 +92,7 @@
   .counter b{font-family:'Fraunces',Georgia,serif;font-size:22px;line-height:1}
 
   /* section head */
-  .sec-title-row{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#FAFCF9}
+  .sec-title-row{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#FAFBFE}
   .sec-title-row input[type=text]{font-weight:700;font-family:'Fraunces',Georgia,serif;font-size:16.5px}
   .toggle{
     display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
@@ -107,7 +115,7 @@
   .tally{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--pine-deep)}
 
   ul.roster{list-style:none;margin:0;padding:0}
-  ul.roster li{border-bottom:1px solid #EDF1EB}
+  ul.roster li{border-bottom:1px solid #EEF0F6}
   ul.roster li:last-child{border-bottom:0}
 
   .person{
@@ -139,7 +147,7 @@
   }
   .hint{font-size:12px;color:var(--slate)}
 
-  .guest-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#FBFCFA;flex-wrap:wrap}
+  .guest-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#FBFCFE;flex-wrap:wrap}
   .guest-row input[type=text]{flex:1;min-width:130px}
   .add{
     font:inherit;font-weight:700;font-size:13.5px;background:var(--pine);color:#fff;
@@ -148,7 +156,7 @@
   .add:hover{background:var(--pine-deep)}
   .chip{
     display:inline-flex;align-items:center;gap:7px;background:var(--gold-soft);
-    border:1px solid #E8D9AE;color:#6E4E06;border-radius:999px;
+    border:1px solid #E7DAB2;color:#6E4E06;border-radius:999px;
     padding:6px 8px 6px 12px;font-size:13px;font-weight:600;margin:0 6px 6px 0
   }
   .chip b{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
@@ -159,9 +167,9 @@
   .none-state{padding:16px 14px;color:var(--slate);font-size:14px;font-style:italic}
 
   /* output */
-  .out-card{border-color:var(--pine);box-shadow:0 1px 2px rgba(18,33,26,.06), 0 10px 30px rgba(46,107,79,.14)}
+  .out-card{border-color:var(--pine);box-shadow:0 1px 2px rgba(21,26,43,.06), 0 10px 30px rgba(40,51,104,.14)}
   pre.out{
-    margin:0;padding:16px;background:#F7FAF6;border:0;
+    margin:0;padding:16px;background:#F7F8FC;border:0;
     font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
     font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word;color:var(--ink);
     max-height:46vh;overflow:auto;
@@ -180,7 +188,7 @@
   .ghost:hover{border-color:var(--pine);color:var(--pine-deep)}
 
   dl.defs{margin:0}
-  dl.defs > div{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed #E2E8DF}
+  dl.defs > div{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed #E1E4EF}
   dl.defs > div:last-child{border-bottom:0;padding-bottom:0}
   dl.defs dt{
     flex:0 0 46px;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;
