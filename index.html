@@ -1,0 +1,617 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CG Weekly Attendance Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12211A;
+    --ink-soft:#5A6A62;
+    --field:#E7EDE5;
+    --card:#FFFFFF;
+    --line:#D2DCCF;
+    --pine:#2E6B4F;
+    --pine-deep:#1E4B37;
+    --pine-soft:#E3EFE8;
+    --gold:#A8790E;
+    --gold-soft:#F6EEDA;
+    --slate:#7C8880;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(18,33,26,.06), 0 8px 24px rgba(18,33,26,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--field);
+    color:var(--ink);
+    font-family:'Karla',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    padding:18px 14px 64px;
+  }
+  .wrap{max-width:600px;margin:0 auto}
+
+  header.top{margin:6px 2px 18px}
+  .eyebrow{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--pine);font-weight:700;margin:0 0 6px
+  }
+  h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:700;font-size:31px;line-height:1.05;margin:0;
+    letter-spacing:-.015em;
+  }
+  h1 em{font-style:italic;font-weight:500;color:var(--pine-deep)}
+  .sub{margin:8px 0 0;color:var(--ink-soft);font-size:14.5px;max-width:44ch}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);margin:0 0 16px;overflow:hidden;
+  }
+  .card-head{
+    display:flex;align-items:center;gap:10px;
+    padding:14px 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#fff, #FAFCF9);
+  }
+  .card-head h2{
+    font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;margin:0;flex:1;
+    letter-spacing:-.01em;
+  }
+  .card-body{padding:14px 16px 16px}
+
+  label.f{display:block;margin:0 0 12px}
+  label.f span{
+    display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;margin:0 0 5px
+  }
+  input[type=text]{
+    width:100%;padding:10px 12px;font:inherit;color:var(--ink);
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+  }
+  input[type=text]:focus,select:focus,button:focus-visible{
+    outline:2px solid var(--pine);outline-offset:1px;border-color:var(--pine);
+  }
+  .row2{display:flex;gap:10px}
+  .row2 label.f{flex:1}
+
+  .counter{
+    display:flex;align-items:baseline;gap:8px;
+    background:var(--pine-soft);border-radius:10px;padding:9px 12px;
+    font-size:13px;color:var(--pine-deep);font-weight:600;
+  }
+  .counter b{font-family:'Fraunces',Georgia,serif;font-size:22px;line-height:1}
+
+  /* section head */
+  .sec-title-row{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#FAFCF9}
+  .sec-title-row input[type=text]{font-weight:700;font-family:'Fraunces',Georgia,serif;font-size:16.5px}
+  .toggle{
+    display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+    color:var(--ink-soft);cursor:pointer;user-select:none;white-space:nowrap;
+    border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:#fff;
+  }
+  .toggle input{accent-color:var(--pine);margin:0;width:15px;height:15px}
+  .toggle.on{border-color:var(--pine);color:var(--pine-deep);background:var(--pine-soft)}
+
+  .bar{
+    display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+    padding:11px 14px;border-bottom:1px solid var(--line);
+  }
+  .mini{
+    font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.02em;
+    border:1px solid var(--line);background:#fff;color:var(--ink-soft);
+    border-radius:999px;padding:7px 12px;cursor:pointer;
+  }
+  .mini:hover{border-color:var(--pine);color:var(--pine-deep)}
+  .tally{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--pine-deep)}
+
+  ul.roster{list-style:none;margin:0;padding:0}
+  ul.roster li{border-bottom:1px solid #EDF1EB}
+  ul.roster li:last-child{border-bottom:0}
+
+  .person{
+    display:flex;align-items:center;gap:11px;width:100%;
+    padding:11px 14px;background:transparent;border:0;font:inherit;text-align:left;
+    cursor:pointer;position:relative;color:var(--ink);
+  }
+  .person::before{
+    content:"";position:absolute;inset:0;background:var(--pine-soft);
+    transform:scaleX(0);transform-origin:left;transition:transform .18s ease;
+  }
+  .person > *{position:relative}
+  .person.present::before{transform:scaleX(1)}
+  .num{
+    width:23px;height:23px;flex:none;border-radius:6px;border:1px solid var(--line);
+    display:grid;place-items:center;font-size:11.5px;font-weight:700;color:var(--slate);background:#fff;
+  }
+  .person.present .num{background:var(--pine);border-color:var(--pine);color:#fff}
+  .nm{flex:1;font-weight:600;font-size:15.5px}
+  .person.present .nm{color:var(--pine-deep)}
+  .state{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--slate)}
+  .person.present .state{color:var(--pine)}
+
+  .detail{display:flex;gap:8px;padding:0 14px 11px 48px;align-items:center;flex-wrap:wrap}
+  .detail input[type=text]{padding:8px 11px;font-size:14px}
+  select{
+    font:inherit;font-size:13px;font-weight:600;padding:8px 9px;border-radius:9px;
+    border:1px solid var(--line);background:#fff;color:var(--ink)
+  }
+  .hint{font-size:12px;color:var(--slate)}
+
+  .guest-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#FBFCFA;flex-wrap:wrap}
+  .guest-row input[type=text]{flex:1;min-width:130px}
+  .add{
+    font:inherit;font-weight:700;font-size:13.5px;background:var(--pine);color:#fff;
+    border:0;border-radius:10px;padding:9px 15px;cursor:pointer
+  }
+  .add:hover{background:var(--pine-deep)}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;background:var(--gold-soft);
+    border:1px solid #E8D9AE;color:#6E4E06;border-radius:999px;
+    padding:6px 8px 6px 12px;font-size:13px;font-weight:600;margin:0 6px 6px 0
+  }
+  .chip b{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .chip button{border:0;background:transparent;font:inherit;cursor:pointer;color:#6E4E06;font-size:15px;line-height:1;padding:0 2px}
+  .chips{padding:0 14px 10px}
+  .chips:empty{display:none}
+
+  .none-state{padding:16px 14px;color:var(--slate);font-size:14px;font-style:italic}
+
+  /* output */
+  .out-card{border-color:var(--pine);box-shadow:0 1px 2px rgba(18,33,26,.06), 0 10px 30px rgba(46,107,79,.14)}
+  pre.out{
+    margin:0;padding:16px;background:#F7FAF6;border:0;
+    font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+    font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word;color:var(--ink);
+    max-height:46vh;overflow:auto;
+  }
+  .out-actions{display:flex;gap:9px;padding:13px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .primary{
+    flex:1;min-width:150px;font:inherit;font-weight:700;font-size:15px;
+    background:var(--pine);color:#fff;border:0;border-radius:11px;padding:13px 16px;cursor:pointer;
+  }
+  .primary:hover{background:var(--pine-deep)}
+  .primary.done{background:var(--gold)}
+  .ghost{
+    font:inherit;font-weight:700;font-size:14px;background:#fff;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:11px;padding:13px 16px;cursor:pointer
+  }
+  .ghost:hover{border-color:var(--pine);color:var(--pine-deep)}
+
+  dl.defs{margin:0}
+  dl.defs > div{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed #E2E8DF}
+  dl.defs > div:last-child{border-bottom:0;padding-bottom:0}
+  dl.defs dt{
+    flex:0 0 46px;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;
+    color:var(--pine-deep);letter-spacing:.02em;
+  }
+  dl.defs dd{margin:0;font-size:14.5px;color:var(--ink-soft)}
+  footer{text-align:center;color:var(--slate);font-size:12px;margin-top:22px}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Cell group · weekly</p>
+    <h1>Attendance <em>report</em></h1>
+    <p class="sub">Add your members once under Roster. After that, tap a name to mark present and the WhatsApp message writes itself at the bottom.</p>
+  </header>
+
+  <div class="card">
+    <div class="card-head"><h2>This week</h2></div>
+    <div class="card-body">
+      <label class="f"><span>CG</span><input type="text" id="cgName" placeholder="CYC11W"></label>
+      <div class="row2">
+        <label class="f" style="flex:0 0 40%"><span>Month</span><select id="monthSel" style="width:100%;padding:10px 12px;font-size:16px"></select></label>
+        <label class="f"><span>Week / dates</span><input type="text" id="dateLabel" placeholder="W4 or 14-16"></label>
+      </div>
+      <div class="counter"><b id="omTotal">0</b> members on the roster</div>
+    </div>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="card">
+    <div class="card-head"><h2>Roster</h2><button class="mini" id="toggleRoster">Edit</button></div>
+    <div class="card-body" id="rosterEditor" hidden></div>
+  </div>
+
+  <div class="card out-card">
+    <div class="card-head"><h2>Report</h2></div>
+    <pre class="out" id="output"></pre>
+    <div class="out-actions">
+      <button class="primary" id="copyBtn">Copy report</button>
+      <button class="ghost" id="resetBtn">Clear week</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h2>What the labels mean</h2><button class="mini" id="toggleLegend">Hide</button></div>
+    <div class="card-body" id="legendBody">
+      <dl class="defs">
+        <div><dt>OM</dt><dd>Ordinary member</dd></div>
+        <div><dt>NB</dt><dd>New believer</dd></div>
+        <div><dt>AC</dt><dd>Accept Christ</dd></div>
+        <div><dt>NF</dt><dd>New friend</dd></div>
+        <div><dt>RNF</dt><dd>Repeat new friend</dd></div>
+        <div><dt>BS</dt><dd>Back slide. Former church member who has not come for some time</dd></div>
+      </dl>
+    </div>
+  </div>
+  <footer>Roster and settings stay saved on this device.</footer>
+</div>
+
+<script>
+const STATUSES = ["OM","NB","AC","NF","RNF","BS"];
+const uid = () => Math.random().toString(36).slice(2,9);
+
+let state = {
+  cg: "",
+  month: "",
+  dateLabel: "",
+  members: [],
+  sections: [
+    {id: uid(), title: "CG", none: false,  att: {}, guests: []},
+    {id: uid(), title: "Sunday Service", none: false, att: {}, guests: []}
+  ]
+};
+
+const KEY = "cg-attendance-state";
+async function save(){
+  const raw = JSON.stringify(state);
+  try{ window.localStorage.setItem(KEY, raw); }catch(e){}
+  try{ if(window.storage) await window.storage.set(KEY, raw); }catch(e){}
+}
+async function load(){
+  try{
+    const local = window.localStorage.getItem(KEY);
+    if(local){
+      const p = JSON.parse(local);
+      if(p && p.members && p.sections){ state = p; return; }
+    }
+  }catch(e){}
+  try{
+    if(!window.storage) return;
+    const r = await window.storage.get(KEY);
+    if(r && r.value){
+      const p = JSON.parse(r.value);
+      if(p && p.members && p.sections) state = p;
+    }
+  }catch(e){}
+}
+
+const rec = (sec, id) => sec.att[id] || (sec.att[id] = {present:false, status:"OM", reason:""});
+
+/* ---------- rendering ---------- */
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function buildMonths(){
+  const sel = document.getElementById("monthSel");
+  if(sel.options.length) return;
+  const y = new Date().getFullYear();
+  MONTHS.forEach(m => {
+    const o = document.createElement("option");
+    o.value = m + " " + y; o.textContent = m + " " + y; sel.append(o);
+  });
+  const prev = document.createElement("option");
+  prev.value = ""; prev.textContent = "No month";
+  sel.append(prev);
+  if(!state.month) state.month = MONTHS[new Date().getMonth()] + " " + y;
+}
+
+function render(){
+  buildMonths();
+  document.getElementById("cgName").value = state.cg;
+  document.getElementById("monthSel").value = state.month;
+  document.getElementById("dateLabel").value = state.dateLabel;
+  document.getElementById("omTotal").textContent = state.members.length;
+  renderSections();
+  renderRoster();
+  renderOutput();
+  if(!state.members.length){
+    const box = document.getElementById("rosterEditor");
+    box.hidden = false;
+    document.getElementById("toggleRoster").textContent = "Done";
+  }
+  save();
+}
+
+function renderSections(){
+  const host = document.getElementById("sections");
+  host.innerHTML = "";
+  state.sections.forEach((sec, si) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const head = document.createElement("div");
+    head.className = "sec-title-row";
+    const ti = document.createElement("input");
+    ti.type = "text"; ti.value = sec.title; ti.placeholder = "Service name";
+    ti.oninput = () => { sec.title = ti.value; renderOutput(); save(); };
+    const tg = document.createElement("label");
+    tg.className = "toggle" + (sec.none ? " on" : "");
+    tg.innerHTML = '<input type="checkbox"' + (sec.none ? " checked" : "") + '> None';
+    tg.querySelector("input").onchange = e => { sec.none = e.target.checked; render(); };
+    head.append(ti, tg);
+    card.append(head);
+
+    if(sec.none){
+      const p = document.createElement("div");
+      p.className = "none-state";
+      p.textContent = "Reported as none this week. All counts stay at zero.";
+      card.append(p);
+      host.append(card);
+      return;
+    }
+
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    const all = document.createElement("button");
+    all.className = "mini"; all.textContent = "All present";
+    all.onclick = () => { state.members.forEach(m => { const r = rec(sec, m.id); r.present = true; r.reason = ""; }); render(); };
+    const none = document.createElement("button");
+    none.className = "mini"; none.textContent = "Clear";
+    none.onclick = () => { state.members.forEach(m => { rec(sec, m.id).present = false; }); render(); };
+    const tally = document.createElement("span");
+    tally.className = "tally";
+    const present = state.members.filter(m => rec(sec, m.id).present).length + sec.guests.length;
+    tally.textContent = present + " present · " + (state.members.length - state.members.filter(m => rec(sec,m.id).present).length) + " absent";
+    bar.append(all, none, tally);
+    card.append(bar);
+
+    const ul = document.createElement("ul");
+    ul.className = "roster";
+    if(!state.members.length){
+      const li = document.createElement("li");
+      li.innerHTML = '<div class="none-state">Add your members under Roster below and they will appear here.</div>';
+      ul.append(li);
+    }
+    state.members.forEach((m, i) => {
+      const r = rec(sec, m.id);
+      const li = document.createElement("li");
+
+      const btn = document.createElement("button");
+      btn.className = "person" + (r.present ? " present" : "");
+      btn.setAttribute("aria-pressed", r.present ? "true" : "false");
+      btn.innerHTML = '<span class="num">' + (i+1) + '</span><span class="nm"></span><span class="state">' +
+                      (r.present ? r.status : "Absent") + '</span>';
+      btn.querySelector(".nm").textContent = m.name;
+      btn.onclick = () => { r.present = !r.present; if(r.present) r.reason = ""; render(); };
+      li.append(btn);
+
+      const det = document.createElement("div");
+      det.className = "detail";
+      if(r.present){
+        const sel = document.createElement("select");
+        STATUSES.forEach(s => {
+          const o = document.createElement("option");
+          o.value = s; o.textContent = s; if(s === r.status) o.selected = true;
+          sel.append(o);
+        });
+        sel.onchange = () => { r.status = sel.value; render(); };
+        const h = document.createElement("span");
+        h.className = "hint"; h.textContent = "counted as";
+        det.append(h, sel);
+      } else {
+        const ri = document.createElement("input");
+        ri.type = "text"; ri.value = r.reason; ri.placeholder = "Reason (work, sick, travel)";
+        ri.style.flex = "1";
+        ri.oninput = () => { r.reason = ri.value; renderOutput(); save(); };
+        det.append(ri);
+      }
+      li.append(det);
+      ul.append(li);
+    });
+    card.append(ul);
+
+    const chips = document.createElement("div");
+    chips.className = "chips";
+    sec.guests.forEach(g => {
+      const c = document.createElement("span");
+      c.className = "chip";
+      c.innerHTML = '<b>' + g.status + '</b><span></span><button aria-label="Remove">&times;</button>';
+      c.querySelector("span").textContent = g.name;
+      c.querySelector("button").onclick = () => { sec.guests = sec.guests.filter(x => x.id !== g.id); render(); };
+      chips.append(c);
+    });
+    card.append(chips);
+
+    const gr = document.createElement("div");
+    gr.className = "guest-row";
+    const gi = document.createElement("input");
+    gi.type = "text"; gi.placeholder = "Add visitor or new friend";
+    const gs = document.createElement("select");
+    ["NF","NB","AC","RNF","BS","OM"].forEach(s => {
+      const o = document.createElement("option"); o.value = s; o.textContent = s; gs.append(o);
+    });
+    const gb = document.createElement("button");
+    gb.className = "add"; gb.textContent = "Add";
+    const addGuest = () => {
+      const n = gi.value.trim();
+      if(!n) return;
+      sec.guests.push({id: uid(), name: n, status: gs.value});
+      gi.value = ""; render();
+    };
+    gb.onclick = addGuest;
+    gi.onkeydown = e => { if(e.key === "Enter") addGuest(); };
+    gr.append(gi, gs, gb);
+    card.append(gr);
+
+    host.append(card);
+  });
+}
+
+function renderRoster(){
+  const box = document.getElementById("rosterEditor");
+  box.innerHTML = "";
+  state.members.forEach((m, i) => {
+    const row = document.createElement("div");
+    row.style.cssText = "display:flex;gap:8px;align-items:center;margin-bottom:8px";
+    const n = document.createElement("span");
+    n.className = "num"; n.textContent = i+1;
+    const inp = document.createElement("input");
+    inp.type = "text"; inp.value = m.name;
+    inp.oninput = () => { m.name = inp.value; renderOutput(); save(); };
+    const del = document.createElement("button");
+    del.className = "ghost"; del.style.padding = "9px 13px"; del.textContent = "Remove";
+    del.onclick = () => {
+      state.members = state.members.filter(x => x.id !== m.id);
+      state.sections.forEach(s => { delete s.att[m.id]; });
+      render();
+    };
+    row.append(n, inp, del);
+    box.append(row);
+  });
+  const add = document.createElement("div");
+  add.style.cssText = "display:flex;gap:8px;margin-top:12px";
+  const ni = document.createElement("input");
+  ni.type = "text"; ni.placeholder = "New member name";
+  const nb = document.createElement("button");
+  nb.className = "add"; nb.textContent = "Add member";
+  const doAdd = () => {
+    const v = ni.value.trim();
+    if(!v) return;
+    state.members.push({id: uid(), name: v});
+    ni.value = ""; render();
+    document.getElementById("rosterEditor").hidden = false;
+    const box2 = document.getElementById("rosterEditor");
+    if(box2) box2.querySelector("input[placeholder='New member name']").focus();
+  };
+  nb.onclick = doAdd;
+  ni.onkeydown = e => { if(e.key === "Enter") doAdd(); };
+  add.append(ni, nb);
+  box.append(add);
+
+  const bulkWrap = document.createElement("div");
+  bulkWrap.style.cssText = "margin-top:16px;padding-top:14px;border-top:1px solid var(--line)";
+  const bl = document.createElement("span");
+  bl.style.cssText = "display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 6px";
+  bl.textContent = "Or paste a list";
+  const ta = document.createElement("textarea");
+  ta.placeholder = "One name per line";
+  ta.rows = 4;
+  ta.style.cssText = "width:100%;padding:10px 12px;font:inherit;font-size:15px;border:1px solid var(--line);border-radius:10px;resize:vertical";
+  const bb = document.createElement("button");
+  bb.className = "add"; bb.textContent = "Add all"; bb.style.marginTop = "8px";
+  bb.onclick = () => {
+    const names = ta.value.split(/\n|,/).map(s => s.trim()).filter(Boolean);
+    if(!names.length) return;
+    names.forEach(n => state.members.push({id: uid(), name: n}));
+    ta.value = ""; render();
+    document.getElementById("rosterEditor").hidden = false;
+  };
+  bulkWrap.append(bl, ta, bb);
+  box.append(bulkWrap);
+}
+
+/* ---------- report text ---------- */
+function buildReport(){
+  const L = [];
+  L.push("*CG Weekly Attendance Report*");
+  L.push("CG : " + (state.cg || ""));
+  L.push("Total OM : " + state.members.length);
+  L.push("Date :  " + [state.month, state.dateLabel].filter(Boolean).join(" ").trim());
+
+  state.sections.forEach(sec => {
+    L.push("");
+    const title = sec.title || "Service";
+    L.push("*💒 " + (sec.none ? title + " : No " + title : title) + "*");
+    L.push("*======================*");
+
+    if(sec.none){
+      L.push("Total - 0");
+      L.push("");
+      L.push("OM - 0");
+      L.push("NB - 0");
+      L.push("AC - 0");
+      L.push("NF - 0");
+      L.push("RNF/BS - 0");
+      L.push("Abs : 0");
+      return;
+    }
+
+    const by = {};
+    STATUSES.forEach(s => by[s] = []);
+    state.members.forEach(m => {
+      const r = rec(sec, m.id);
+      if(r.present) by[r.status].push(m.name);
+    });
+    sec.guests.forEach(g => { if(by[g.status]) by[g.status].push(g.name); });
+
+    const absent = state.members.filter(m => !rec(sec, m.id).present);
+    const total = STATUSES.reduce((a,s) => a + by[s].length, 0);
+
+    L.push("Total - " + total);
+    L.push("");
+    L.push("OM - " + by.OM.length);
+    if(by.OM.length) L.push(by.OM.join(", "));
+    L.push("NB - " + (by.NB.length ? by.NB.join(", ") : "0"));
+    L.push("AC - " + (by.AC.length ? by.AC.join(", ") : "0"));
+    L.push("NF - " + (by.NF.length ? by.NF.join(", ") : "0"));
+    const rb = by.RNF.concat(by.BS);
+    L.push("RNF/BS - " + (rb.length ? rb.join(", ") : "0"));
+
+    if(!absent.length){
+      L.push("Abs : 0");
+    } else {
+      const names = absent.map(m => {
+        const r = rec(sec, m.id);
+        return m.name + (r.reason.trim() ? " (" + r.reason.trim() + ")" : "");
+      });
+      L.push("Abs : " + absent.length + " " + names.join(", "));
+    }
+  });
+
+  return L.join("\n");
+}
+
+function renderOutput(){
+  document.getElementById("output").textContent = buildReport();
+  document.getElementById("omTotal").textContent = state.members.length;
+}
+
+/* ---------- wiring ---------- */
+document.getElementById("cgName").oninput = e => { state.cg = e.target.value; renderOutput(); save(); };
+document.getElementById("dateLabel").oninput = e => { state.dateLabel = e.target.value; renderOutput(); save(); };
+
+document.getElementById("monthSel").onchange = e => { state.month = e.target.value; renderOutput(); save(); };
+
+document.getElementById("toggleLegend").onclick = e => {
+  const box = document.getElementById("legendBody");
+  box.hidden = !box.hidden;
+  e.target.textContent = box.hidden ? "Show" : "Hide";
+};
+
+document.getElementById("toggleRoster").onclick = e => {
+  const box = document.getElementById("rosterEditor");
+  box.hidden = !box.hidden;
+  e.target.textContent = box.hidden ? "Edit" : "Done";
+};
+
+document.getElementById("copyBtn").onclick = async e => {
+  const text = buildReport();
+  let ok = false;
+  try{ await navigator.clipboard.writeText(text); ok = true; }
+  catch(err){
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.append(ta); ta.select();
+    try{ ok = document.execCommand("copy"); }catch(e2){}
+    ta.remove();
+  }
+  const b = e.target;
+  b.textContent = ok ? "Copied. Paste into WhatsApp" : "Select the text above to copy";
+  b.classList.toggle("done", ok);
+  setTimeout(() => { b.textContent = "Copy report"; b.classList.remove("done"); }, 2400);
+};
+
+document.getElementById("resetBtn").onclick = () => {
+  state.sections.forEach(s => { s.att = {}; s.guests = []; });
+  state.dateLabel = "";
+  render();
+  document.getElementById("dateLabel").focus();
+};
+
+load().then(render);
+</script>
