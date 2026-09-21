@@ -243,7 +243,7 @@
     </div>
   </section>
 
-  <footer>Everything stays saved on this device.</footer>
+  <footer><span id="verTag"></span>Everything stays saved on this device.</footer>
 </div>
 
 <datalist id="noteList"></datalist>
@@ -697,8 +697,28 @@ $("resetBtn").onclick = () => {
   render();
 };
 
+/* ---------- self update ---------- */
+const APP_VERSION = "2026.09.21-2";
+async function checkForUpdate(){
+  try{
+    const res = await fetch(location.pathname + "?check=" + Date.now(), {cache: "no-store"});
+    if(!res.ok) return;
+    const txt = await res.text();
+    const m = txt.match(/const APP_VERSION = "([^"]+)"/);
+    if(m && m[1] !== APP_VERSION){
+      const flag = "cg-updated-to";
+      try{ if(sessionStorage.getItem(flag) === m[1]) return; sessionStorage.setItem(flag, m[1]); }catch(e){}
+      await save();
+      location.replace(location.pathname + "?v=" + encodeURIComponent(m[1]));
+    }
+  }catch(e){}
+}
+document.addEventListener("visibilitychange", () => { if(!document.hidden) checkForUpdate(); });
+
 load().then(() => {
   render();
+  $("verTag").textContent = "Version " + APP_VERSION + " · ";
   if(!state.members.length) document.querySelector('nav.tabs button[data-tab="mem"]').click();
+  checkForUpdate();
 });
 </script>
