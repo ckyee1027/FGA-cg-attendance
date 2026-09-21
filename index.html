@@ -31,172 +31,118 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
-    background:var(--field);
-    color:var(--ink);
+    background:var(--field);color:var(--ink);
     font-family:'Karla',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
-    font-size:16px;
-    line-height:1.45;
-    -webkit-font-smoothing:antialiased;
-    padding:18px 14px 64px;
+    font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;
+    padding:14px 14px 64px;
   }
   .wrap{max-width:600px;margin:0 auto}
 
-  header.top{margin:6px 2px 18px}
-  .eyebrow{
-    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--pine);font-weight:700;margin:0 0 6px
-  }
-  h1{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:700;font-size:31px;line-height:1.05;margin:0;
-    letter-spacing:-.015em;
-  }
-  h1 em{font-style:italic;font-weight:500;color:var(--pine-deep)}
-  .sub{margin:8px 0 0;color:var(--ink-soft);font-size:14.5px;max-width:44ch}
+  header.top{margin:6px 2px 14px}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--pine);font-weight:700;margin:0 0 6px}
+  h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:30px;line-height:1.05;margin:0;letter-spacing:-.015em}
+  h1 em{font-style:italic;font-weight:500;color:var(--pine)}
 
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow);margin:0 0 16px;overflow:hidden;
+  nav.tabs{
+    position:sticky;top:0;z-index:5;display:flex;gap:4px;
+    background:var(--field);padding:8px 0 12px;margin:0 0 4px;
   }
-  .card-head{
-    display:flex;align-items:center;gap:10px;
-    padding:14px 16px;border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg,#fff, #FAFBFE);
+  nav.tabs button{
+    flex:1;font:inherit;font-weight:700;font-size:14px;cursor:pointer;
+    border:1px solid var(--line);background:#fff;color:var(--ink-soft);
+    padding:10px 6px;border-radius:11px;
   }
-  .card-head h2{
-    font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;margin:0;flex:1;
-    letter-spacing:-.01em;
-  }
+  nav.tabs button.on{background:var(--pine);border-color:var(--pine);color:#fff}
+  nav.tabs .count{font-size:11px;opacity:.75;margin-left:4px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 16px;overflow:hidden}
+  .card-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#FAFBFE)}
+  .card-head h2{font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;margin:0;flex:1;letter-spacing:-.01em}
   .card-body{padding:14px 16px 16px}
 
   label.f{display:block;margin:0 0 12px}
-  label.f span{
-    display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ink-soft);font-weight:700;margin:0 0 5px
-  }
-  input[type=text]{
-    width:100%;padding:10px 12px;font:inherit;color:var(--ink);
-    background:#fff;border:1px solid var(--line);border-radius:10px;
-  }
-  input[type=text]:focus,select:focus,button:focus-visible{
-    outline:2px solid var(--pine);outline-offset:1px;border-color:var(--pine);
-  }
+  label.f span,.lbl{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 5px}
+  input[type=text],textarea{width:100%;padding:10px 12px;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px}
+  textarea{resize:vertical}
+  select{font:inherit;font-size:14px;font-weight:600;padding:9px 9px;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--pine);outline-offset:1px;border-color:var(--pine)}
   .row2{display:flex;gap:10px}
-  .row2 label.f{flex:1}
+  .row2 > *{flex:1}
 
-  .counter{
-    display:flex;align-items:baseline;gap:8px;
-    background:var(--pine-soft);border-radius:10px;padding:9px 12px;
-    font-size:13px;color:var(--pine-deep);font-weight:600;
-  }
+  .counter{display:flex;align-items:baseline;gap:8px;background:var(--pine-soft);border-radius:10px;padding:9px 12px;font-size:13px;color:var(--pine-deep);font-weight:600}
   .counter b{font-family:'Fraunces',Georgia,serif;font-size:22px;line-height:1}
 
-  /* section head */
   .sec-title-row{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#FAFBFE}
   .sec-title-row input[type=text]{font-weight:700;font-family:'Fraunces',Georgia,serif;font-size:16.5px}
-  .toggle{
-    display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
-    color:var(--ink-soft);cursor:pointer;user-select:none;white-space:nowrap;
-    border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:#fff;
-  }
+  .toggle{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;user-select:none;white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:#fff}
   .toggle input{accent-color:var(--pine);margin:0;width:15px;height:15px}
   .toggle.on{border-color:var(--pine);color:var(--pine-deep);background:var(--pine-soft)}
 
-  .bar{
-    display:flex;gap:8px;flex-wrap:wrap;align-items:center;
-    padding:11px 14px;border-bottom:1px solid var(--line);
-  }
-  .mini{
-    font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.02em;
-    border:1px solid var(--line);background:#fff;color:var(--ink-soft);
-    border-radius:999px;padding:7px 12px;cursor:pointer;
-  }
+  .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line)}
+  .mini{font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:999px;padding:7px 12px;cursor:pointer}
   .mini:hover{border-color:var(--pine);color:var(--pine-deep)}
   .tally{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--pine-deep)}
+
+  .group{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--slate);padding:12px 14px 4px;background:#fff}
 
   ul.roster{list-style:none;margin:0;padding:0}
   ul.roster li{border-bottom:1px solid #EEF0F6}
   ul.roster li:last-child{border-bottom:0}
-
-  .person{
-    display:flex;align-items:center;gap:11px;width:100%;
-    padding:11px 14px;background:transparent;border:0;font:inherit;text-align:left;
-    cursor:pointer;position:relative;color:var(--ink);
-  }
-  .person::before{
-    content:"";position:absolute;inset:0;background:var(--pine-soft);
-    transform:scaleX(0);transform-origin:left;transition:transform .18s ease;
-  }
+  .person{display:flex;align-items:center;gap:11px;width:100%;padding:11px 14px;background:transparent;border:0;font:inherit;text-align:left;cursor:pointer;position:relative;color:var(--ink)}
+  .person::before{content:"";position:absolute;inset:0;background:var(--pine-soft);transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
   .person > *{position:relative}
   .person.present::before{transform:scaleX(1)}
-  .num{
-    width:23px;height:23px;flex:none;border-radius:6px;border:1px solid var(--line);
-    display:grid;place-items:center;font-size:11.5px;font-weight:700;color:var(--slate);background:#fff;
-  }
+  .num{width:23px;height:23px;flex:none;border-radius:6px;border:1px solid var(--line);display:grid;place-items:center;font-size:11.5px;font-weight:700;color:var(--slate);background:#fff}
   .person.present .num{background:var(--pine);border-color:var(--pine);color:#fff}
   .nm{flex:1;font-weight:600;font-size:15.5px}
   .person.present .nm{color:var(--pine-deep)}
   .state{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--slate)}
   .person.present .state{color:var(--pine)}
+  .detail{display:flex;gap:8px;padding:0 14px 11px 48px;align-items:center}
+  .detail input[type=text]{padding:8px 11px;font-size:14px;flex:1;min-width:0}
+  .detail select{font-size:13px;padding:8px}
 
-  .detail{display:flex;gap:8px;padding:0 14px 11px 48px;align-items:center;flex-wrap:wrap}
-  .detail input[type=text]{padding:8px 11px;font-size:14px}
-  select{
-    font:inherit;font-size:13px;font-weight:600;padding:8px 9px;border-radius:9px;
-    border:1px solid var(--line);background:#fff;color:var(--ink)
-  }
-  .hint{font-size:12px;color:var(--slate)}
+  .vchips{display:flex;flex-wrap:wrap;gap:7px;padding:8px 14px 10px}
+  .vchip{font:inherit;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:999px;padding:7px 12px;display:inline-flex;align-items:center;gap:7px}
+  .vchip b{font-size:10px;letter-spacing:.1em;color:var(--slate)}
+  .vchip.on{background:var(--pine);border-color:var(--pine);color:#fff}
+  .vchip.on b{color:#C9CEEA}
+  .vrow{display:flex;gap:8px;align-items:center;padding:6px 14px}
+  .vrow .vn{flex:0 0 34%;font-weight:600;font-size:14.5px;color:var(--pine-deep);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .vrow input[type=text]{padding:8px 11px;font-size:14px;flex:1;min-width:0}
+  .vrow select{font-size:13px;padding:8px}
+  .search{padding:4px 14px 0}
+  .search input{padding:8px 11px;font-size:14px}
 
-  .guest-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#FBFCFE;flex-wrap:wrap}
-  .guest-row input[type=text]{flex:1;min-width:130px}
-  .add{
-    font:inherit;font-weight:700;font-size:13.5px;background:var(--pine);color:#fff;
-    border:0;border-radius:10px;padding:9px 15px;cursor:pointer
-  }
+  .add-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#FBFCFE;flex-wrap:wrap}
+  .add-row input[type=text]{flex:1;min-width:130px}
+  .add{font:inherit;font-weight:700;font-size:13.5px;background:var(--pine);color:#fff;border:0;border-radius:10px;padding:9px 15px;cursor:pointer}
   .add:hover{background:var(--pine-deep)}
-  .chip{
-    display:inline-flex;align-items:center;gap:7px;background:var(--gold-soft);
-    border:1px solid #E7DAB2;color:#6E4E06;border-radius:999px;
-    padding:6px 8px 6px 12px;font-size:13px;font-weight:600;margin:0 6px 6px 0
-  }
-  .chip b{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
-  .chip button{border:0;background:transparent;font:inherit;cursor:pointer;color:#6E4E06;font-size:15px;line-height:1;padding:0 2px}
-  .chips{padding:0 14px 10px}
-  .chips:empty{display:none}
+  .ghost{font:inherit;font-weight:700;font-size:14px;background:#fff;color:var(--ink-soft);border:1px solid var(--line);border-radius:11px;padding:13px 16px;cursor:pointer}
+  .ghost.sm{font-size:13px;padding:8px 12px;border-radius:9px}
+  .ghost:hover{border-color:var(--pine);color:var(--pine-deep)}
+  .ghost:disabled{opacity:.4;cursor:default}
 
   .none-state{padding:16px 14px;color:var(--slate);font-size:14px;font-style:italic}
+  .hint{font-size:13px;color:var(--slate);margin:0 0 12px}
 
-  /* output */
-  .out-card{border-color:var(--pine);box-shadow:0 1px 2px rgba(21,26,43,.06), 0 10px 30px rgba(40,51,104,.14)}
-  pre.out{
-    margin:0;padding:16px;background:#F7F8FC;border:0;
-    font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-    font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word;color:var(--ink);
-    max-height:46vh;overflow:auto;
-  }
+  .edit-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .edit-row input[type=text]{flex:1;min-width:0}
+
+  .out-card{border-color:var(--pine);box-shadow:0 1px 2px rgba(21,26,43,.06),0 10px 30px rgba(40,51,104,.14)}
+  pre.out{margin:0;padding:16px;background:#F7F8FC;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word;color:var(--ink);max-height:52vh;overflow:auto}
   .out-actions{display:flex;gap:9px;padding:13px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
-  .primary{
-    flex:1;min-width:150px;font:inherit;font-weight:700;font-size:15px;
-    background:var(--pine);color:#fff;border:0;border-radius:11px;padding:13px 16px;cursor:pointer;
-  }
+  .primary{flex:1;min-width:150px;font:inherit;font-weight:700;font-size:15px;background:var(--pine);color:#fff;border:0;border-radius:11px;padding:13px 16px;cursor:pointer}
   .primary:hover{background:var(--pine-deep)}
   .primary.done{background:var(--gold)}
-  .ghost{
-    font:inherit;font-weight:700;font-size:14px;background:#fff;color:var(--ink-soft);
-    border:1px solid var(--line);border-radius:11px;padding:13px 16px;cursor:pointer
-  }
-  .ghost:hover{border-color:var(--pine);color:var(--pine-deep)}
 
   dl.defs{margin:0}
   dl.defs > div{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed #E1E4EF}
   dl.defs > div:last-child{border-bottom:0;padding-bottom:0}
-  dl.defs dt{
-    flex:0 0 46px;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;
-    color:var(--pine-deep);letter-spacing:.02em;
-  }
+  dl.defs dt{flex:0 0 46px;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;color:var(--pine-deep)}
   dl.defs dd{margin:0;font-size:14.5px;color:var(--ink-soft)}
-  footer{text-align:center;color:var(--slate);font-size:12px;margin-top:22px}
 
+  footer{text-align:center;color:var(--slate);font-size:12px;margin-top:22px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -204,208 +150,316 @@
   <header class="top">
     <p class="eyebrow">Cell group · weekly</p>
     <h1>Attendance <em>report</em></h1>
-    <p class="sub">Add your members once under Roster. After that, tap a name to mark present and the WhatsApp message writes itself at the bottom.</p>
   </header>
 
-  <div class="card">
-    <div class="card-head"><h2>This week</h2></div>
-    <div class="card-body">
-      <label class="f"><span>CG</span><input type="text" id="cgName" placeholder="CYC11W"></label>
-      <div class="row2">
-        <label class="f" style="flex:0 0 40%"><span>Month</span><select id="monthSel" style="width:100%;padding:10px 12px;font-size:16px"></select></label>
-        <label class="f"><span>Week / dates</span><input type="text" id="dateLabel" placeholder="W4 or 14-16"></label>
+  <nav class="tabs">
+    <button data-tab="att" class="on">Attendance</button>
+    <button data-tab="vis">Visitors<span class="count" id="visCount"></span></button>
+    <button data-tab="mem">Members<span class="count" id="memCount"></span></button>
+  </nav>
+
+  <section id="tab-att">
+    <div class="card">
+      <div class="card-head"><h2>This week</h2></div>
+      <div class="card-body">
+        <label class="f"><span>CG</span><input type="text" id="cgName" placeholder="CYC11W"></label>
+        <div class="row2">
+          <label class="f"><span>Month</span><select id="monthSel" style="width:100%"></select></label>
+          <label class="f"><span>Week</span><select id="weekSel" style="width:100%"></select></label>
+        </div>
+        <div class="counter"><b id="omTotal">0</b> members on the roster</div>
       </div>
-      <div class="counter"><b id="omTotal">0</b> members on the roster</div>
     </div>
-  </div>
 
-  <div id="sections"></div>
+    <div id="sections"></div>
 
-  <div class="card">
-    <div class="card-head"><h2>Roster</h2><button class="mini" id="toggleRoster">Edit</button></div>
-    <div class="card-body" id="rosterEditor" hidden></div>
-  </div>
-
-  <div class="card out-card">
-    <div class="card-head"><h2>Report</h2></div>
-    <pre class="out" id="output"></pre>
-    <div class="out-actions">
-      <button class="primary" id="copyBtn">Copy report</button>
-      <button class="ghost" id="resetBtn">Clear week</button>
+    <div class="card out-card">
+      <div class="card-head">
+        <h2>Report</h2>
+        <label class="toggle" id="boldToggle"><input type="checkbox"> WhatsApp bold</label>
+      </div>
+      <pre class="out" id="output"></pre>
+      <div class="out-actions">
+        <button class="primary" id="copyBtn">Copy report</button>
+        <button class="ghost" id="resetBtn">Clear week</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-head"><h2>What the labels mean</h2><button class="mini" id="toggleLegend">Hide</button></div>
-    <div class="card-body" id="legendBody">
-      <dl class="defs">
-        <div><dt>OM</dt><dd>Ordinary member</dd></div>
-        <div><dt>NB</dt><dd>New believer</dd></div>
-        <div><dt>AC</dt><dd>Accept Christ</dd></div>
-        <div><dt>NF</dt><dd>New friend</dd></div>
-        <div><dt>RNF</dt><dd>Repeat new friend</dd></div>
-        <div><dt>BS</dt><dd>Back slide. Former church member who has not come for some time</dd></div>
-      </dl>
+    <div class="card">
+      <div class="card-head"><h2>What the labels mean</h2><button class="mini" id="toggleLegend">Hide</button></div>
+      <div class="card-body" id="legendBody">
+        <dl class="defs">
+          <div><dt>OM</dt><dd>Ordinary member</dd></div>
+          <div><dt>NB</dt><dd>New believer</dd></div>
+          <div><dt>AC</dt><dd>Accept Christ</dd></div>
+          <div><dt>NF</dt><dd>New friend</dd></div>
+          <div><dt>RNF</dt><dd>Repeat new friend</dd></div>
+          <div><dt>BS</dt><dd>Back slide. Former church member who has not come for some time</dd></div>
+        </dl>
+      </div>
     </div>
-  </div>
-  <footer>Roster and settings stay saved on this device.</footer>
+  </section>
+
+  <section id="tab-vis" hidden>
+    <div class="card">
+      <div class="card-head"><h2>Saved visitors</h2></div>
+      <div class="card-body">
+        <p class="hint">Everyone saved here appears as a tap-to-add name under each service, so you only type them once. The label you set is the default, and it updates whenever you change it on the attendance page.</p>
+        <div id="visList"></div>
+      </div>
+      <div class="add-row">
+        <input type="text" id="visNewName" placeholder="Name, e.g. Wan Ling's Mum">
+        <select id="visNewCat"></select>
+        <button class="add" id="visAddBtn">Add</button>
+      </div>
+      <div class="card-body" style="border-top:1px solid var(--line)">
+        <span class="lbl">Or paste a list</span>
+        <textarea id="visBulk" rows="4" placeholder="One name per line"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+          <span class="hint" style="margin:0">Save all as</span>
+          <select id="visBulkCat"></select>
+          <button class="add" id="visBulkBtn">Add all</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-mem" hidden>
+    <div class="card">
+      <div class="card-head"><h2>CG members</h2></div>
+      <div class="card-body">
+        <p class="hint">Your ordinary members. The count here becomes Total OM in the report.</p>
+        <div id="memList"></div>
+      </div>
+      <div class="add-row">
+        <input type="text" id="memNewName" placeholder="New member name">
+        <button class="add" id="memAddBtn">Add</button>
+      </div>
+      <div class="card-body" style="border-top:1px solid var(--line)">
+        <span class="lbl">Or paste a list</span>
+        <textarea id="memBulk" rows="4" placeholder="One name per line"></textarea>
+        <button class="add" id="memBulkBtn" style="margin-top:8px">Add all</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>Everything stays saved on this device.</footer>
 </div>
+
+<datalist id="noteList"></datalist>
+<datalist id="reasonList"></datalist>
 
 <script>
 const STATUSES = ["OM","NB","AC","NF","RNF","BS"];
-const uid = () => Math.random().toString(36).slice(2,9);
-
-let state = {
-  cg: "",
-  month: "",
-  dateLabel: "",
-  members: [],
-  sections: [
-    {id: uid(), title: "CG", none: false,  att: {}, guests: []},
-    {id: uid(), title: "Sunday Service", none: false, att: {}, guests: []}
-  ]
-};
-
+const VCATS = ["NF","RNF","BS","NB","AC"];
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const KEY = "cg-attendance-state";
+const uid = () => Math.random().toString(36).slice(2,10);
+const $ = id => document.getElementById(id);
+
+function freshState(){
+  return {
+    v: 2, cg: "", month: "", week: "", bold: false,
+    members: [], visitors: [], notes: [], reasons: [],
+    sections: [
+      {id: uid(), title: "After Service CG Gathering", none: false, att: {}, vis: {}},
+      {id: uid(), title: "Sunday Service", none: false, att: {}, vis: {}}
+    ]
+  };
+}
+let state = freshState();
+
 async function save(){
   const raw = JSON.stringify(state);
-  try{ window.localStorage.setItem(KEY, raw); }catch(e){}
+  try{ localStorage.setItem(KEY, raw); }catch(e){}
   try{ if(window.storage) await window.storage.set(KEY, raw); }catch(e){}
+}
+function migrate(p){
+  if(!p || !p.members || !p.sections) return null;
+  p.visitors = p.visitors || [];
+  p.notes = p.notes || [];
+  p.reasons = p.reasons || [];
+  if(p.bold === undefined) p.bold = false;
+  if(p.week === undefined) p.week = "";
+  p.sections.forEach(sec => {
+    sec.vis = sec.vis || {};
+    sec.att = sec.att || {};
+    Object.values(sec.att).forEach(r => { if(r.note === undefined) r.note = ""; });
+    (sec.guests || []).forEach(g => {
+      let v = p.visitors.find(x => x.name.toLowerCase() === g.name.toLowerCase());
+      if(!v){ v = {id: uid(), name: g.name, cat: g.status === "OM" ? "NF" : g.status}; p.visitors.push(v); }
+      sec.vis[v.id] = {present: true, cat: v.cat, note: ""};
+    });
+    delete sec.guests;
+  });
+  delete p.dateLabel;
+  p.v = 2;
+  return p;
 }
 async function load(){
   try{
-    const local = window.localStorage.getItem(KEY);
-    if(local){
-      const p = JSON.parse(local);
-      if(p && p.members && p.sections){ state = p; return; }
-    }
+    const local = localStorage.getItem(KEY);
+    if(local){ const m = migrate(JSON.parse(local)); if(m){ state = m; return; } }
   }catch(e){}
   try{
-    if(!window.storage) return;
-    const r = await window.storage.get(KEY);
-    if(r && r.value){
-      const p = JSON.parse(r.value);
-      if(p && p.members && p.sections) state = p;
+    if(window.storage){
+      const r = await window.storage.get(KEY);
+      if(r && r.value){ const m = migrate(JSON.parse(r.value)); if(m) state = m; }
     }
   }catch(e){}
 }
 
-const rec = (sec, id) => sec.att[id] || (sec.att[id] = {present:false, status:"OM", reason:""});
-
-/* ---------- rendering ---------- */
-const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-function buildMonths(){
-  const sel = document.getElementById("monthSel");
-  if(sel.options.length) return;
-  const y = new Date().getFullYear();
-  MONTHS.forEach(m => {
-    const o = document.createElement("option");
-    o.value = m + " " + y; o.textContent = m + " " + y; sel.append(o);
-  });
-  const prev = document.createElement("option");
-  prev.value = ""; prev.textContent = "No month";
-  sel.append(prev);
-  if(!state.month) state.month = MONTHS[new Date().getMonth()] + " " + y;
+const rec = (sec, id) => sec.att[id] || (sec.att[id] = {present:false, status:"OM", reason:"", note:""});
+function vrec(sec, v){
+  if(!sec.vis[v.id]) sec.vis[v.id] = {present:false, cat:v.cat, note:""};
+  return sec.vis[v.id];
 }
+function el(tag, cls, text){
+  const e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(text !== undefined) e.textContent = text;
+  return e;
+}
+function textInput(value, ph, list){
+  const i = document.createElement("input");
+  i.type = "text"; i.value = value || ""; i.placeholder = ph || "";
+  if(list) i.setAttribute("list", list);
+  return i;
+}
+function selectOf(opts, value){
+  const s = document.createElement("select");
+  opts.forEach(o => {
+    const op = document.createElement("option");
+    op.value = o; op.textContent = o;
+    if(o === value) op.selected = true;
+    s.append(op);
+  });
+  return s;
+}
+function mini(label, fn){ const b = el("button","mini",label); b.onclick = fn; return b; }
+function remember(listName, val){
+  val = (val || "").trim();
+  if(!val) return;
+  const arr = state[listName];
+  const i = arr.findIndex(x => x.toLowerCase() === val.toLowerCase());
+  if(i > -1) arr.splice(i,1);
+  arr.unshift(val);
+  if(arr.length > 25) arr.length = 25;
+  renderLists();
+  save();
+}
+const withNote = (name, note) => note && note.trim() ? name + " (" + note.trim() + ")" : name;
 
 function render(){
-  buildMonths();
-  document.getElementById("cgName").value = state.cg;
-  document.getElementById("monthSel").value = state.month;
-  document.getElementById("dateLabel").value = state.dateLabel;
-  document.getElementById("omTotal").textContent = state.members.length;
+  buildDateSelects();
+  $("cgName").value = state.cg;
+  $("monthSel").value = state.month;
+  $("weekSel").value = state.week;
+  $("omTotal").textContent = state.members.length;
+  $("boldToggle").classList.toggle("on", !!state.bold);
+  $("boldToggle").querySelector("input").checked = !!state.bold;
+  $("visCount").textContent = state.visitors.length ? state.visitors.length : "";
+  $("memCount").textContent = state.members.length ? state.members.length : "";
   renderSections();
-  renderRoster();
+  renderVisitorsPage();
+  renderMembersPage();
+  renderLists();
   renderOutput();
-  if(!state.members.length){
-    const box = document.getElementById("rosterEditor");
-    box.hidden = false;
-    document.getElementById("toggleRoster").textContent = "Done";
-  }
   save();
 }
 
+function buildDateSelects(){
+  const ms = $("monthSel");
+  if(ms.options.length) return;
+  const now = new Date(), y = now.getFullYear();
+  [y-1, y, y+1].forEach(yr => MONTHS.forEach(m => {
+    const o = document.createElement("option"); o.value = o.textContent = m + " " + yr; ms.append(o);
+  }));
+  const ws = $("weekSel");
+  ["Week 1","Week 2","Week 3","Week 4","Week 5"].forEach(w => {
+    const o = document.createElement("option"); o.value = o.textContent = w; ws.append(o);
+  });
+  if(!state.month) state.month = MONTHS[now.getMonth()] + " " + y;
+  if(!/^Week [1-5]$/.test(state.week)) state.week = "Week " + Math.min(5, Math.ceil(now.getDate()/7));
+}
+
+function renderLists(){
+  const fill = (id, arr) => {
+    const dl = $(id); dl.innerHTML = "";
+    arr.forEach(v => { const o = document.createElement("option"); o.value = v; dl.append(o); });
+  };
+  fill("noteList", state.notes);
+  fill("reasonList", state.reasons);
+}
+
 function renderSections(){
-  const host = document.getElementById("sections");
+  const host = $("sections");
   host.innerHTML = "";
   state.sections.forEach((sec, si) => {
-    const card = document.createElement("div");
-    card.className = "card";
+    const card = el("div","card");
 
-    const head = document.createElement("div");
-    head.className = "sec-title-row";
-    const ti = document.createElement("input");
-    ti.type = "text"; ti.value = sec.title; ti.placeholder = "Service name";
+    const head = el("div","sec-title-row");
+    const ti = textInput(sec.title, "Service name");
     ti.oninput = () => { sec.title = ti.value; renderOutput(); save(); };
-    const tg = document.createElement("label");
-    tg.className = "toggle" + (sec.none ? " on" : "");
+    const tg = el("label","toggle" + (sec.none ? " on" : ""));
     tg.innerHTML = '<input type="checkbox"' + (sec.none ? " checked" : "") + '> None';
     tg.querySelector("input").onchange = e => { sec.none = e.target.checked; render(); };
     head.append(ti, tg);
     card.append(head);
 
     if(sec.none){
-      const p = document.createElement("div");
-      p.className = "none-state";
-      p.textContent = "Reported as none this week. All counts stay at zero.";
-      card.append(p);
+      card.append(el("div","none-state","Reported as none this week. All counts stay at zero."));
       host.append(card);
       return;
     }
 
-    const bar = document.createElement("div");
-    bar.className = "bar";
-    const all = document.createElement("button");
-    all.className = "mini"; all.textContent = "All present";
-    all.onclick = () => { state.members.forEach(m => { const r = rec(sec, m.id); r.present = true; r.reason = ""; }); render(); };
-    const none = document.createElement("button");
-    none.className = "mini"; none.textContent = "Clear";
-    none.onclick = () => { state.members.forEach(m => { rec(sec, m.id).present = false; }); render(); };
-    const tally = document.createElement("span");
-    tally.className = "tally";
-    const present = state.members.filter(m => rec(sec, m.id).present).length + sec.guests.length;
-    tally.textContent = present + " present · " + (state.members.length - state.members.filter(m => rec(sec,m.id).present).length) + " absent";
-    bar.append(all, none, tally);
+    const presentM = state.members.filter(m => rec(sec, m.id).present).length;
+    const presentV = state.visitors.filter(v => sec.vis[v.id] && sec.vis[v.id].present).length;
+
+    const bar = el("div","bar");
+    bar.append(mini("All present", () => {
+      state.members.forEach(m => { const r = rec(sec, m.id); r.present = true; r.reason = ""; });
+      render();
+    }));
+    if(si > 0){
+      bar.append(mini("Same as above", () => {
+        const p = state.sections[si-1];
+        sec.att = JSON.parse(JSON.stringify(p.att));
+        sec.vis = JSON.parse(JSON.stringify(p.vis));
+        render();
+      }));
+    }
+    bar.append(mini("Clear", () => { sec.att = {}; sec.vis = {}; render(); }));
+    bar.append(el("span","tally", (presentM + presentV) + " present · " + (state.members.length - presentM) + " absent"));
     card.append(bar);
 
-    const ul = document.createElement("ul");
-    ul.className = "roster";
+    card.append(el("div","group","Members"));
+    const ul = el("ul","roster");
     if(!state.members.length){
-      const li = document.createElement("li");
-      li.innerHTML = '<div class="none-state">Add your members under Roster below and they will appear here.</div>';
+      const li = el("li");
+      li.append(el("div","none-state","No members yet. Add them in the Members tab."));
       ul.append(li);
     }
     state.members.forEach((m, i) => {
       const r = rec(sec, m.id);
-      const li = document.createElement("li");
-
-      const btn = document.createElement("button");
-      btn.className = "person" + (r.present ? " present" : "");
-      btn.setAttribute("aria-pressed", r.present ? "true" : "false");
-      btn.innerHTML = '<span class="num">' + (i+1) + '</span><span class="nm"></span><span class="state">' +
-                      (r.present ? r.status : "Absent") + '</span>';
-      btn.querySelector(".nm").textContent = m.name;
+      const li = el("li");
+      const btn = el("button","person" + (r.present ? " present" : ""));
+      btn.append(el("span","num", String(i+1)), el("span","nm", m.name), el("span","state", r.present ? r.status : "Absent"));
       btn.onclick = () => { r.present = !r.present; if(r.present) r.reason = ""; render(); };
       li.append(btn);
 
-      const det = document.createElement("div");
-      det.className = "detail";
+      const det = el("div","detail");
       if(r.present){
-        const sel = document.createElement("select");
-        STATUSES.forEach(s => {
-          const o = document.createElement("option");
-          o.value = s; o.textContent = s; if(s === r.status) o.selected = true;
-          sel.append(o);
-        });
+        const sel = selectOf(STATUSES, r.status);
         sel.onchange = () => { r.status = sel.value; render(); };
-        const h = document.createElement("span");
-        h.className = "hint"; h.textContent = "counted as";
-        det.append(h, sel);
+        const note = textInput(r.note, "Note, e.g. GS1", "noteList");
+        note.oninput = () => { r.note = note.value; renderOutput(); save(); };
+        note.onchange = () => remember("notes", note.value);
+        det.append(sel, note);
       } else {
-        const ri = document.createElement("input");
-        ri.type = "text"; ri.value = r.reason; ri.placeholder = "Reason (work, sick, travel)";
-        ri.style.flex = "1";
+        const ri = textInput(r.reason, "Reason, e.g. work, Taiwan", "reasonList");
         ri.oninput = () => { r.reason = ri.value; renderOutput(); save(); };
+        ri.onchange = () => remember("reasons", ri.value);
         det.append(ri);
       }
       li.append(det);
@@ -413,191 +467,214 @@ function renderSections(){
     });
     card.append(ul);
 
-    const chips = document.createElement("div");
-    chips.className = "chips";
-    sec.guests.forEach(g => {
-      const c = document.createElement("span");
-      c.className = "chip";
-      c.innerHTML = '<b>' + g.status + '</b><span></span><button aria-label="Remove">&times;</button>';
-      c.querySelector("span").textContent = g.name;
-      c.querySelector("button").onclick = () => { sec.guests = sec.guests.filter(x => x.id !== g.id); render(); };
-      chips.append(c);
-    });
-    card.append(chips);
-
-    const gr = document.createElement("div");
-    gr.className = "guest-row";
-    const gi = document.createElement("input");
-    gi.type = "text"; gi.placeholder = "Add visitor or new friend";
-    const gs = document.createElement("select");
-    ["NF","NB","AC","RNF","BS","OM"].forEach(s => {
-      const o = document.createElement("option"); o.value = s; o.textContent = s; gs.append(o);
-    });
-    const gb = document.createElement("button");
-    gb.className = "add"; gb.textContent = "Add";
-    const addGuest = () => {
-      const n = gi.value.trim();
-      if(!n) return;
-      sec.guests.push({id: uid(), name: n, status: gs.value});
-      gi.value = ""; render();
+    card.append(el("div","group","Visitors & new friends · tap to add"));
+    let filter = "";
+    const chipWrap = el("div","vchips");
+    const drawChips = () => {
+      chipWrap.innerHTML = "";
+      if(!state.visitors.length){
+        chipWrap.append(el("span","hint","No saved visitors yet. Type a name below and it will be saved for next time."));
+      }
+      state.visitors.filter(v => !filter || v.name.toLowerCase().includes(filter)).forEach(v => {
+        const on = sec.vis[v.id] && sec.vis[v.id].present;
+        const c = el("button","vchip" + (on ? " on" : ""));
+        c.append(el("span", null, v.name), el("b", null, on ? sec.vis[v.id].cat : v.cat));
+        c.onclick = () => {
+          const r = vrec(sec, v);
+          r.present = !r.present;
+          if(r.present) r.cat = r.cat || v.cat;
+          render();
+        };
+        chipWrap.append(c);
+      });
     };
-    gb.onclick = addGuest;
-    gi.onkeydown = e => { if(e.key === "Enter") addGuest(); };
-    gr.append(gi, gs, gb);
-    card.append(gr);
+    if(state.visitors.length > 8){
+      const sw = el("div","search");
+      const sInp = textInput("", "Search saved visitors");
+      sInp.oninput = () => { filter = sInp.value.trim().toLowerCase(); drawChips(); };
+      sw.append(sInp);
+      card.append(sw);
+    }
+    drawChips();
+    card.append(chipWrap);
+
+    state.visitors.filter(v => sec.vis[v.id] && sec.vis[v.id].present).forEach(v => {
+      const r = sec.vis[v.id];
+      const row = el("div","vrow");
+      const cat = selectOf(VCATS, r.cat);
+      cat.onchange = () => { r.cat = cat.value; v.cat = cat.value; render(); };
+      const note = textInput(r.note, "Note", "noteList");
+      note.oninput = () => { r.note = note.value; renderOutput(); save(); };
+      note.onchange = () => remember("notes", note.value);
+      row.append(el("span","vn", v.name), cat, note);
+      card.append(row);
+    });
+
+    const add = el("div","add-row");
+    const ni = textInput("", "New name");
+    const nc = selectOf(VCATS, "NF");
+    const nb = el("button","add","Add");
+    const doAdd = () => {
+      const n = ni.value.trim();
+      if(!n) return;
+      let v = state.visitors.find(x => x.name.toLowerCase() === n.toLowerCase());
+      if(!v){ v = {id: uid(), name: n, cat: nc.value}; state.visitors.push(v); }
+      v.cat = nc.value;
+      sec.vis[v.id] = {present: true, cat: nc.value, note: ""};
+      render();
+    };
+    nb.onclick = doAdd;
+    ni.onkeydown = e => { if(e.key === "Enter") doAdd(); };
+    add.append(ni, nc, nb);
+    card.append(add);
 
     host.append(card);
   });
 }
 
-function renderRoster(){
-  const box = document.getElementById("rosterEditor");
+function renderVisitorsPage(){
+  const box = $("visList");
   box.innerHTML = "";
-  state.members.forEach((m, i) => {
-    const row = document.createElement("div");
-    row.style.cssText = "display:flex;gap:8px;align-items:center;margin-bottom:8px";
-    const n = document.createElement("span");
-    n.className = "num"; n.textContent = i+1;
-    const inp = document.createElement("input");
-    inp.type = "text"; inp.value = m.name;
-    inp.oninput = () => { m.name = inp.value; renderOutput(); save(); };
-    const del = document.createElement("button");
-    del.className = "ghost"; del.style.padding = "9px 13px"; del.textContent = "Remove";
+  if(!state.visitors.length) box.append(el("p","hint","Nobody saved yet."));
+  state.visitors.forEach(v => {
+    const row = el("div","edit-row");
+    const inp = textInput(v.name);
+    inp.oninput = () => { v.name = inp.value; renderOutput(); save(); };
+    inp.onchange = () => render();
+    const cat = selectOf(VCATS, v.cat);
+    cat.onchange = () => { v.cat = cat.value; render(); };
+    const del = el("button","ghost sm","Remove");
     del.onclick = () => {
-      state.members = state.members.filter(x => x.id !== m.id);
-      state.sections.forEach(s => { delete s.att[m.id]; });
+      state.visitors = state.visitors.filter(x => x.id !== v.id);
+      state.sections.forEach(s => delete s.vis[v.id]);
       render();
     };
-    row.append(n, inp, del);
+    row.append(inp, cat, del);
     box.append(row);
   });
-  const add = document.createElement("div");
-  add.style.cssText = "display:flex;gap:8px;margin-top:12px";
-  const ni = document.createElement("input");
-  ni.type = "text"; ni.placeholder = "New member name";
-  const nb = document.createElement("button");
-  nb.className = "add"; nb.textContent = "Add member";
-  const doAdd = () => {
-    const v = ni.value.trim();
-    if(!v) return;
-    state.members.push({id: uid(), name: v});
-    ni.value = ""; render();
-    document.getElementById("rosterEditor").hidden = false;
-    const box2 = document.getElementById("rosterEditor");
-    if(box2) box2.querySelector("input[placeholder='New member name']").focus();
-  };
-  nb.onclick = doAdd;
-  ni.onkeydown = e => { if(e.key === "Enter") doAdd(); };
-  add.append(ni, nb);
-  box.append(add);
-
-  const bulkWrap = document.createElement("div");
-  bulkWrap.style.cssText = "margin-top:16px;padding-top:14px;border-top:1px solid var(--line)";
-  const bl = document.createElement("span");
-  bl.style.cssText = "display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 6px";
-  bl.textContent = "Or paste a list";
-  const ta = document.createElement("textarea");
-  ta.placeholder = "One name per line";
-  ta.rows = 4;
-  ta.style.cssText = "width:100%;padding:10px 12px;font:inherit;font-size:15px;border:1px solid var(--line);border-radius:10px;resize:vertical";
-  const bb = document.createElement("button");
-  bb.className = "add"; bb.textContent = "Add all"; bb.style.marginTop = "8px";
-  bb.onclick = () => {
-    const names = ta.value.split(/\n|,/).map(s => s.trim()).filter(Boolean);
-    if(!names.length) return;
-    names.forEach(n => state.members.push({id: uid(), name: n}));
-    ta.value = ""; render();
-    document.getElementById("rosterEditor").hidden = false;
-  };
-  bulkWrap.append(bl, ta, bb);
-  box.append(bulkWrap);
 }
 
-/* ---------- report text ---------- */
+function renderMembersPage(){
+  const box = $("memList");
+  box.innerHTML = "";
+  if(!state.members.length) box.append(el("p","hint","No members yet."));
+  state.members.forEach((m, i) => {
+    const row = el("div","edit-row");
+    const inp = textInput(m.name);
+    inp.oninput = () => { m.name = inp.value; renderOutput(); save(); };
+    inp.onchange = () => render();
+    const up = el("button","ghost sm","↑");
+    up.disabled = i === 0;
+    up.onclick = () => { const a = state.members; [a[i-1], a[i]] = [a[i], a[i-1]]; render(); };
+    const del = el("button","ghost sm","Remove");
+    del.onclick = () => {
+      state.members = state.members.filter(x => x.id !== m.id);
+      state.sections.forEach(s => delete s.att[m.id]);
+      render();
+    };
+    row.append(el("span","num", String(i+1)), inp, up, del);
+    box.append(row);
+  });
+}
+
 function buildReport(){
+  const B = s => state.bold ? "*" + s + "*" : s;
   const L = [];
-  L.push("*CG Weekly Attendance Report*");
+  L.push(B("CG Weekly Attendance Report"));
   L.push("CG : " + (state.cg || ""));
   L.push("Total OM : " + state.members.length);
-  L.push("Date :  " + [state.month, state.dateLabel].filter(Boolean).join(" ").trim());
+  L.push("Date :  " + [state.month, state.week].filter(Boolean).join(" "));
+
+  const line = (label, arr) => arr.length ? label + " - " + arr.length + " " + arr.join(", ") : label + " - 0";
 
   state.sections.forEach(sec => {
+    const t = (sec.title || "Service").trim();
     L.push("");
-    const title = sec.title || "Service";
-    L.push("*💒 " + (sec.none ? title + " : No " + title : title) + "*");
-    L.push("*======================*");
-
     if(sec.none){
-      L.push("Total - 0");
-      L.push("");
-      L.push("OM - 0");
-      L.push("NB - 0");
-      L.push("AC - 0");
-      L.push("NF - 0");
-      L.push("RNF/BS - 0");
-      L.push("Abs : 0");
+      L.push(B("💒 " + t + " : No " + t));
+      L.push(B("======================"));
+      L.push("Total - 0", "", "OM - 0", "NB - 0", "AC - 0", "NF - 0", "RNF/BS - 0", "Abs : 0");
       return;
     }
+    L.push(B("💒 " + t));
+    L.push(B("======================"));
 
-    const by = {};
-    STATUSES.forEach(s => by[s] = []);
+    const g = {}; STATUSES.forEach(s => g[s] = []);
     state.members.forEach(m => {
       const r = rec(sec, m.id);
-      if(r.present) by[r.status].push(m.name);
+      if(r.present) g[r.status].push(withNote(m.name, r.note));
     });
-    sec.guests.forEach(g => { if(by[g.status]) by[g.status].push(g.name); });
-
+    state.visitors.forEach(v => {
+      const r = sec.vis[v.id];
+      if(r && r.present) g[r.cat || v.cat].push(withNote(v.name, r.note));
+    });
+    const total = STATUSES.reduce((a, s) => a + g[s].length, 0);
     const absent = state.members.filter(m => !rec(sec, m.id).present);
-    const total = STATUSES.reduce((a,s) => a + by[s].length, 0);
 
     L.push("Total - " + total);
     L.push("");
-    L.push("OM - " + by.OM.length);
-    if(by.OM.length) L.push(by.OM.join(", "));
-    L.push("NB - " + (by.NB.length ? by.NB.join(", ") : "0"));
-    L.push("AC - " + (by.AC.length ? by.AC.join(", ") : "0"));
-    L.push("NF - " + (by.NF.length ? by.NF.join(", ") : "0"));
-    const rb = by.RNF.concat(by.BS);
-    L.push("RNF/BS - " + (rb.length ? rb.join(", ") : "0"));
-
-    if(!absent.length){
-      L.push("Abs : 0");
-    } else {
-      const names = absent.map(m => {
-        const r = rec(sec, m.id);
-        return m.name + (r.reason.trim() ? " (" + r.reason.trim() + ")" : "");
-      });
-      L.push("Abs : " + absent.length + " " + names.join(", "));
-    }
+    L.push("OM - " + g.OM.length);
+    if(g.OM.length) L.push(g.OM.join(", "));
+    L.push(line("NB", g.NB));
+    L.push(line("AC", g.AC));
+    L.push(line("NF", g.NF));
+    L.push(line("RNF/BS", g.RNF.concat(g.BS)));
+    L.push(absent.length
+      ? "Abs : " + absent.length + " " + absent.map(m => withNote(m.name, rec(sec, m.id).reason)).join(", ")
+      : "Abs : 0");
   });
-
   return L.join("\n");
 }
+function renderOutput(){ $("output").textContent = buildReport(); }
 
-function renderOutput(){
-  document.getElementById("output").textContent = buildReport();
-  document.getElementById("omTotal").textContent = state.members.length;
-}
+document.querySelectorAll("nav.tabs button").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll("nav.tabs button").forEach(x => x.classList.toggle("on", x === b));
+    ["att","vis","mem"].forEach(t => $("tab-" + t).hidden = t !== b.dataset.tab);
+    window.scrollTo({top: 0});
+  };
+});
 
-/* ---------- wiring ---------- */
-document.getElementById("cgName").oninput = e => { state.cg = e.target.value; renderOutput(); save(); };
-document.getElementById("dateLabel").oninput = e => { state.dateLabel = e.target.value; renderOutput(); save(); };
+$("cgName").oninput = e => { state.cg = e.target.value; renderOutput(); save(); };
+$("monthSel").onchange = e => { state.month = e.target.value; renderOutput(); save(); };
+$("weekSel").onchange = e => { state.week = e.target.value; renderOutput(); save(); };
+$("boldToggle").querySelector("input").onchange = e => { state.bold = e.target.checked; render(); };
 
-document.getElementById("monthSel").onchange = e => { state.month = e.target.value; renderOutput(); save(); };
-
-document.getElementById("toggleLegend").onclick = e => {
-  const box = document.getElementById("legendBody");
+$("toggleLegend").onclick = e => {
+  const box = $("legendBody");
   box.hidden = !box.hidden;
   e.target.textContent = box.hidden ? "Show" : "Hide";
 };
 
-document.getElementById("toggleRoster").onclick = e => {
-  const box = document.getElementById("rosterEditor");
-  box.hidden = !box.hidden;
-  e.target.textContent = box.hidden ? "Edit" : "Done";
+["visNewCat","visBulkCat"].forEach(id => VCATS.forEach(c => {
+  const o = document.createElement("option"); o.value = o.textContent = c; $(id).append(o);
+}));
+function addVisitor(name, cat){
+  name = name.trim();
+  if(!name) return;
+  if(state.visitors.some(x => x.name.toLowerCase() === name.toLowerCase())) return;
+  state.visitors.push({id: uid(), name, cat});
+}
+$("visAddBtn").onclick = () => { addVisitor($("visNewName").value, $("visNewCat").value); $("visNewName").value = ""; render(); };
+$("visNewName").onkeydown = e => { if(e.key === "Enter") $("visAddBtn").click(); };
+$("visBulkBtn").onclick = () => {
+  $("visBulk").value.split(/\n/).forEach(n => addVisitor(n, $("visBulkCat").value));
+  $("visBulk").value = ""; render();
 };
 
-document.getElementById("copyBtn").onclick = async e => {
+function addMember(name){
+  name = name.trim();
+  if(!name) return;
+  state.members.push({id: uid(), name});
+}
+$("memAddBtn").onclick = () => { addMember($("memNewName").value); $("memNewName").value = ""; render(); };
+$("memNewName").onkeydown = e => { if(e.key === "Enter") $("memAddBtn").click(); };
+$("memBulkBtn").onclick = () => {
+  $("memBulk").value.split(/\n|,/).forEach(addMember);
+  $("memBulk").value = ""; render();
+};
+
+$("copyBtn").onclick = async e => {
   const text = buildReport();
   let ok = false;
   try{ await navigator.clipboard.writeText(text); ok = true; }
@@ -614,12 +691,14 @@ document.getElementById("copyBtn").onclick = async e => {
   setTimeout(() => { b.textContent = "Copy report"; b.classList.remove("done"); }, 2400);
 };
 
-document.getElementById("resetBtn").onclick = () => {
-  state.sections.forEach(s => { s.att = {}; s.guests = []; });
-  state.dateLabel = "";
+$("resetBtn").onclick = () => {
+  if(!confirm("Clear this week's attendance? Members and saved visitors stay.")) return;
+  state.sections.forEach(s => { s.att = {}; s.vis = {}; });
   render();
-  document.getElementById("dateLabel").focus();
 };
 
-load().then(render);
+load().then(() => {
+  render();
+  if(!state.members.length) document.querySelector('nav.tabs button[data-tab="mem"]').click();
+});
 </script>
